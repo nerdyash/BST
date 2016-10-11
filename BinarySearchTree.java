@@ -14,7 +14,7 @@ public class BinarySearchTree implements Cloneable
    //   2. The instance variable root is a reference to the root of the
    //      binary search tree (or null for an empty tree).
    private BinaryTreeNode root;
-   
+
    // Constructor: create an empty tree with an empty root
    BinarySearchTree()
    {
@@ -38,59 +38,38 @@ public class BinarySearchTree implements Cloneable
    **/
    public void add(int element)
    {
-      // BinaryTreeNode curr = root;
-      // BinaryTreeNode pos = null;
-      //
-      // while(curr != null){
-      //    pos = curr;
-      //
-      //    if(curr.getData() < element){
-      //       curr = curr.getRight();
-      //    }
-      //    else{
-      //       curr = curr.getLeft();
-      //    }
-      // }
-      //
-      // if(root == null){
-      //    root = new BinaryTreeNode(element,null,null);
-      // }
-      //
-      // else if(pos.getData() < element){
-      //    curr.setRight(pos.getRight());
-      //    curr = new BinaryTreeNode(element,null,null);
-      // }
-      //
-      // else{
-      //    curr.setLeft(pos.getLeft());
-      //    curr = new BinaryTreeNode(element,null,null);
-      // }
-
-      // BinaryTreeNode node = new BinaryTreeNode(element, null, null);
-      // if(root == null){
-      //    root = node;
-      // }
-      // else{
-      //    addNode(node);
-      // }
-
-      root = addNode(root, new BinaryTreeNode(element, null, null));
-
+      BinaryTreeNode curr = root;
+      if(curr == null)
+         curr = root = new BinaryTreeNode(element,null,null);
+      else
+      {
+	      while(true)
+	      {
+	         if(element<=curr.getData())
+	         {
+	            if(curr.getLeft()==null)
+	            {
+	               curr.setLeft(new BinaryTreeNode(element,null,null));
+	               break;
+	            }
+	            else
+	               curr = curr.getLeft();
+	         }
+	         else
+	         {
+	            if(curr.getRight()==null)
+	            {
+	               curr.setRight(new BinaryTreeNode(element,null,null));
+	               break;
+	            }
+	            else
+	               curr = curr.getRight();
+	         }
+	      	}
+      	}
    }
-   public BinaryTreeNode addNode(BinaryTreeNode root, BinaryTreeNode node){
-      if(root == null){
-         return node;
-      }
-      else if(node.getData() <= root.getData()){
-         root = root.getLeft();
-         root =  addNode(root.getLeft(), node);
-      }
-      else if(node.getData() > root.getData()){
-         root = root.getRight();
-         root = addNode(root.getRight(), node);
-      }
-      return root;
-   }
+
+
 
 
    /**
@@ -106,7 +85,14 @@ public class BinarySearchTree implements Cloneable
    **/
    public void addAll(BinarySearchTree addend)
    {
-
+	   BinaryTreeNode addroot;
+	   if(root == addend.root){
+		   addroot = BinaryTreeNode.treeCopy(addend.root);
+		   addTree(addroot);
+	   }
+	   else{
+		   addTree(addend.root);
+	   }
    }
 
 
@@ -120,7 +106,14 @@ public class BinarySearchTree implements Cloneable
    **/
    private void addTree(BinaryTreeNode addroot)
    {
+	   if(addroot != null){
+		   add(addroot.getData());
 
+			   addTree(addroot.getLeft());
+
+			   addTree(addroot.getRight());
+
+	   }
    }
 
 
@@ -131,7 +124,23 @@ public class BinarySearchTree implements Cloneable
    **/
    public long countOccurrences(int target)
    {
-      return 0;
+	   long count = 0;
+	   BinaryTreeNode cursor = root;
+	  while(cursor!=null){
+		  if(target == cursor.getData()){
+			  count++;
+			  cursor = cursor.getLeft();
+		  }
+		  else if(target > cursor.getData()){
+			  cursor = cursor.getRight();
+		  }
+		  else{
+			  cursor = cursor.getLeft();
+		  }
+
+	  }
+	return count;
+
    }
 
 
@@ -141,9 +150,62 @@ public class BinarySearchTree implements Cloneable
    * <b>Postcondition:</b>: If "target" was found in the tree, then the node containing "target" is
    * removed and the method returns true. If no "target" is found then the method returns false.
    **/
+
    public boolean remove(int target)
    {
-      return false;
+	   BinaryTreeNode cursor = root;
+	   BinaryTreeNode parent = null;
+
+	   if(root == null){
+		   return false;
+	   }
+	   else{
+		   while(cursor!=null && cursor.getData() != target){
+			   parent = cursor;
+			   if(cursor.getData() > target){
+
+				   cursor = cursor.getLeft();
+
+			   }
+			   else {
+
+				   cursor = cursor.getRight();
+
+			   }
+		   }
+		  if(cursor.getData() == target){
+		   if(cursor ==  root){
+			   if(cursor.getLeft() == null){
+				   root = root.getRight();
+
+			   }
+			   else{
+				   cursor.setData(cursor.getLeft().getRightmostData());
+				   cursor.setLeft(cursor.getLeft().removeRightmost());
+			   }
+		   }
+
+		   if(cursor.getLeft() == null){
+			   if(cursor == parent.getLeft()){
+				   parent.setLeft(cursor.getRight());
+
+			   }
+			   else{
+				   parent.setRight(cursor.getRight());
+
+			   }
+		   }
+		   else{
+			   cursor.setData(cursor.getLeft().getRightmostData());
+			   cursor.setLeft(cursor.getLeft().removeRightmost());
+
+		   }
+		   return true;
+		  }
+		 }
+	return false;
+
+
    }
 
 
@@ -152,9 +214,9 @@ public class BinarySearchTree implements Cloneable
    * @param - none
    * @return : the number of elements in this tree
    **/
-   public int size( )
-   {
-      return 0;
-   }
+//   public int size( )
+//   {
+//      return 0;
+//   }
 
 }

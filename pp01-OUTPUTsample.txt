@@ -1,0 +1,140 @@
+
+1) Input (read) treeA from a text file: 
+
+Reading a TREE from treeA.txt file:
+45
+9
+3
+17
+20
+53
+54
+End of Reading !
+
+2) Print treeA: 
+
+ Inorder treeA: 
+3 9 17 20 45 53 54 
+ Preorder treeA: 
+45 9 3 17 20 53 54 
+ Postorder treeA: 
+3 20 17 9 54 53 45 
+
+ Display treeA: (with indentation) 
+                                        45
+                                            9
+                                                3
+                                                17
+                                                    --
+                                                    20
+                                            53
+                                                --
+                                                54
+
+3) Input (read) treeB from a text file: 
+
+Reading a TREE from treeB.txt file:
+50
+1
+30
+80
+10
+End of Reading !
+
+4) Display treeB: 
+                                        50
+                                            1
+                                                --
+                                                30
+                                                    10
+                                                    --
+                                            80
+
+5) The treeB has been added to treeA => tree C 
+Writing this tree to treeC.txt
+
+   writing treeC to a text file ...
+
+   Display treeC: 
+                                        45
+                                            9
+                                                3
+                                                    1
+                                                    --
+                                                17
+                                                    10
+                                                    20
+                                                        --
+                                                        30
+                                            53
+                                                50
+                                                54
+                                                    --
+                                                    80
+
+6) Enter the Value of a node Z to SEARCH in treeC :
+17
+has appeared 1 times in treeC
+
+7) Display treeD(a copy of treeC): 
+                                        45
+                                            9
+                                                3
+                                                    1
+                                                    --
+                                                17
+                                                    10
+                                                    20
+                                                        --
+                                                        30
+                                            53
+                                                50
+                                                54
+                                                    --
+                                                    80
+
+8) treeD's SIZE = 12
+9) Enter a Value X for the NEW node to be ADDED: 
+47
+
+   Display the NEW TreeC AFTER adding a the with X: 
+                                        45
+                                            9
+                                                3
+                                                    1
+                                                    --
+                                                17
+                                                    10
+                                                    20
+                                                        --
+                                                        30
+                                            53
+                                                50
+                                                    47
+                                                    --
+                                                54
+                                                    --
+                                                    80
+
+10) Enter the Value Y of the node to be REMOVED:
+30
+
+   Result of removing: true
+
+   Display the NEW TreeD after removing the node with Y: 
+
+                                        45
+                                            9
+                                                3
+                                                    1
+                                                    --
+                                                17
+                                                    10
+                                                    20
+                                            53
+                                                50
+                                                54
+                                                    --
+                                                    80
+
+!!! THE END !!!
